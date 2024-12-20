@@ -72,7 +72,15 @@
                         <div class="icon">
                             <i class="fas fa-unlock"></i>
                         </div>
-                        <div>暂无</div>
+                        <div>汽车资讯</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="menu-item" data-target="page6">
+                        <div class="icon">
+                            <i class="fas fa-unlock"></i>
+                        </div>
+                        <div>二手车出租</div>
                     </a>
                 </li>
             </ul>
@@ -91,7 +99,9 @@
             </div>
         </div>
         <div class="content">
-            <div id="page1" class="page" style="display: none;">主页内容</div>
+            <div id="page1" class="page" style="display: none;">
+                介绍用户系统主要功能
+            </div>
             <div id="page2" class="page" style="display: none;">
                 <iframe
                         src="https://bisheng.dataelem.com/chat/assistant/3a2b7843-54b2-40a5-980e-5aecdb07ac12"
@@ -100,9 +110,12 @@
                         allow="fullscreen;clipboard-write">
                 </iframe>
             </div>
-            <div id="page3" class="page" style="display: none;">投稿信息内容</div>
-            <div id="page4" class="page" style="display: none;">占个位置内容</div>
-            <div id="page5" class="page" style="display: none;">占个位置内容</div>
+            <div id="page3" class="page" style="display: none;">汽车信息查询</div>
+            <div id="page4" class="page" style="display: none;">汽车排行</div>
+            <div id="page5" class="page" style="display: none;">汽车资讯</div>
+            <div id="page6" class="page" style="display: none;">
+                二手车出租
+            </div>
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class test extends Dao{
+public class user_operation_dao extends Dao{
     public static void main(String[] args) {
         String sql="SELECT * FROM employee_information";
         try (
