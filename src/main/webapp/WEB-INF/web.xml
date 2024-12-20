@@ -4,4 +4,13 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>RentalServlet</servlet-name>
+    <servlet-class>com.servlet.RentalServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RentalServlet</servlet-name>
+    <url-pattern>/rental</url-pattern>
+  </servlet-mapping>
 </web-app>
