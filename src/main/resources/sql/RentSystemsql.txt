@@ -1,0 +1,55 @@
+-- 创建名为 rental_status 的表，用于存储租车状态信息。
+CREATE TABLE rental_status (
+    status_id INT AUTO_INCREMENT PRIMARY KEY COMMENT '状态id',
+    status_name VARCHAR(50) NOT NULL UNIQUE COMMENT '租车状态'
+);
+
+-- 创建名为 cars 的表，用于存储汽车信息。
+CREATE TABLE cars (
+    car_id INT AUTO_INCREMENT PRIMARY KEY COMMENT '汽车id',
+    make VARCHAR(50) NOT NULL COMMENT '汽车制造商',
+    model VARCHAR(50) NOT NULL COMMENT '汽车具体型号',
+    year INT NOT NULL COMMENT '汽车制造年份',
+    price_per_day DECIMAL(10, 2) NOT NULL COMMENT '汽车日租金价格'
+);
+
+-- 创建名为 users 的表，用于存储用户信息。
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT COMMENT '用户的id' PRIMARY KEY,
+    username VARCHAR(50) NOT NULL COMMENT '用户名',
+    email VARCHAR(100) NOT NULL COMMENT '用户邮箱',
+    password VARCHAR(100) NOT NULL COMMENT '用户密码'
+);
+
+-- 创建名为 car_rental 的表，用于存储租车记录信息。
+CREATE TABLE car_rental (
+    rental_id INT AUTO_INCREMENT COMMENT '租车记录id' PRIMARY KEY,
+    car_id INT NOT NULL COMMENT '关联的汽车ID',
+    user_id INT NOT NULL COMMENT '租车用户的ID',
+    start_date DATE NOT NULL COMMENT '租车开始日期',
+    end_date DATE NOT NULL COMMENT '还车日期',
+    total_price DECIMAL(10, 2) NOT NULL COMMENT '租车总费用',
+    status_id INT NOT NULL COMMENT '租车状态的ID，参考rental_status表',
+    FOREIGN KEY (car_id) REFERENCES cars(car_id) COMMENT '指向cars表的外键，代表租车的车辆',
+    FOREIGN KEY (user_id) REFERENCES users(user_id) COMMENT '指向users表的外键，代表租车的用户',
+    FOREIGN KEY (status_id) REFERENCES rental_status(status_id) COMMENT '指向rental_status表的外键，代表租车状态'
+) COMMENT '租车记录表';
+
+-- 插入测试数据
+-- 租车状态
+INSERT INTO rental_status (status_name) VALUES ('PENDING'), ('RENTED'), ('RETURNED');
+
+-- 汽车信息
+INSERT INTO cars (make, model, year, price_per_day) VALUES
+('Toyota', 'Corolla', 2020, 50.00),
+('Honda', 'Civic', 2019, 45.00),
+('Ford', 'Mustang', 2021, 75.00);
+
+-- 用户信息
+INSERT INTO users (username, email, password) VALUES
+('john_doe', 'john@example.com', 'password123'),
+('jane_smith', 'jane@example.com', 'password456');
+
+-- 租车记录
+INSERT INTO rental_status (status_name) VALUES ('PENDING'), ('RENTED'), ('RETURNED');
+
