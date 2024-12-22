@@ -57,6 +57,7 @@ body{
     margin-left: 250px;
     width: calc(100% - 250px);
     transition: all 0.3s ease;
+    height: 1000px;
 }
 
 .sidebar_inner .profile_info{
@@ -178,8 +179,8 @@ body{
     font-size: 20px;
 }
 .content {
-    width: 80%;  /* 设置宽度为容器宽度的80% */
-    height: 500px;  /* 设置高度为500px */
+    width: 95%;  /* 设置宽度为容器宽度的80% */
+    height: 75%;  /* 设置高度为500px */
     padding: 20px;  /* 内边距设置为20px */
     display: flex;  /* 使用弹性布局 */
     flex-wrap: wrap; /* 子元素换行 */
@@ -191,14 +192,17 @@ body{
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.125),
     -2px -2px 4px rgba(0, 0, 0, 0.125);
     margin: 10px 5px;
-    width: 31.8%;
+    width: 100%;
     padding: 20px;
 }
-
+.page{
+    width: 100%;
+    height: 100%;
+}
 .accordion{
     background: #6f6fc7;
     padding-left: 50px;
-    height: 0px;
+    height: 0;
     transition: all 0.3s ease;
     overflow: hidden;
 }
@@ -266,4 +270,203 @@ ul::-webkit-scrollbar{
     .content .item{
         width: 100%;
     }
+}
+/* 排行榜按钮样式 */
+.ranking-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.ranking-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    width: 250px;
+    height: 70px;
+}
+
+.ranking-btn:hover {
+    background-color: #0056b3;
+    width: 250px;
+    height: 70px;
+}
+
+/* 榜单内容样式 */
+.ranking-content {
+    margin-top: 20px;
+}
+
+.ranking-list {
+    display: none;
+}
+
+.ranking-list ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.ranking-list li {
+    margin: 10px 0;
+    font-size: 18px;
+}
+.car-photo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.model {
+    font-weight: bold;
+}
+
+.value {
+    color: #007BFF;
+}
+
+.ranking-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+/* 整体样式 */
+.ranking-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 排行榜容器 */
+.ranking-list {
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* 榜单标题 */
+.ranking-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* 排行榜项列表 */
+.ranking-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ranking-items li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 16px;
+    color: #666;
+}
+
+.ranking-items li:hover {
+    background-color: #f5f5f5;
+    transition: background-color 0.3s ease;
+}
+
+.ranking-items li .rank {
+    font-weight: bold;
+    color: #0073e6;
+}
+
+.ranking-items li .name {
+    flex-grow: 1;
+    padding-left: 15px;
+}
+
+.ranking-items li .value {
+    font-weight: bold;
+    color: #333;
+}
+
+.ranking-items li .value-retention {
+    font-weight: 600;
+    color: #999;
+}
+
+/* 隐藏排行榜默认情况下 */
+.ranking-list[style="display: none;"] {
+    display: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .ranking-title {
+        font-size: 20px;
+    }
+
+    .ranking-items li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ranking-items li .name {
+        padding-left: 0;
+    }
+
+    .ranking-items li .value {
+        padding-top: 10px;
+    }
+}
+/* 设置整个列表的样式 */
+#ranking-list {
+    display: grid;                /* 使用 Grid 布局 */
+    grid-template-columns: repeat(4, 1fr); /* 四列均匀分布，每列占 1fr */
+    gap: 10px;                     /* 列之间的间距 */
+    padding: 10px;
+}
+
+/* 设置标题行（header）的样式 */
+.ranking-header {
+    display: grid;                /* 使用 Grid 布局 */
+    grid-template-columns: repeat(4, 1fr); /* 四列均匀分布 */
+    gap: 10px;
+    font-weight: bold;            /* 加粗标题 */
+    padding: 10px;
+    background-color: #f5f5f5;    /* 背景色 */
+}
+
+/* 设置每个列表项（ranking-item）的样式 */
+.ranking-item {
+    display: grid;                /* 使用 Grid 布局 */
+    grid-template-columns: 1fr 1fr 2fr 1fr;  /* 调整每列的宽度比例 */
+    gap: 10px;                     /* 列之间的间距 */
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* 分隔线 */
+}
+
+/* 每个单独的元素样式 */
+.ranking-item .rank, .ranking-item .model, .ranking-item .value {
+    text-align: center;           /* 内容居中 */
+}
+
+.ranking-item .car-photo {
+    width: 50px;                  /* 图片宽度 */
+    height: 50px;                 /* 图片高度 */
+    object-fit: cover;            /* 图片裁剪 */
+    border-radius: 50%;           /* 圆形图片 */
 }
