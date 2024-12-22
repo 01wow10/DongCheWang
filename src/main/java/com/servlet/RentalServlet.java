@@ -1,7 +1,12 @@
 package com.servlet;
 
+
 import com.model.Rental;
 import com.service.CarRentalService;
+
+import com.service.CarRentalService;
+import com.model.Rental;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

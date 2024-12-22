@@ -1,14 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rental Page</title>
     <link rel="stylesheet" href="css/backstage.css">
-    <!--这里引入的是矢量图标签库-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
@@ -20,6 +19,9 @@
                 <i class="fas fa-times"></i>
             </div>
             <div class="profile_info">
+                <div class="profile_img">
+                    <img src="images/logo_logo.png" alt="">
+                </div>
                 <div class="profile_data">
                     <p class="name">懂车王</p>
                     <span>
@@ -106,34 +108,7 @@
                 </iframe>
             </div>
             <div id="page3" class="page" style="display: none;">汽车信息查询</div>
-
-            <div id="page4" class="page" style="display: none;">
-                <!-- 排行榜按钮区 -->
-                <div class="ranking-buttons">
-                    <button class="ranking-btn" id="sales-ranking">销量榜</button>
-                    <button class="ranking-btn" id="focus-ranking">关注榜</button>
-                    <button class="ranking-btn" id="value-retention-ranking">保值榜</button>
-                </div>
-
-                <!-- 榜单显示区 -->
-                <div class="ranking-content">
-                    <div id="sales" class="ranking-list" style="display: none;">
-                        <h3 class="ranking-title">销量榜</h3>
-                        <ul id="sales-list" class="ranking-items"></ul>
-                    </div>
-                    <div id="focus" class="ranking-list" style="display: none;">
-                        <h3 class="ranking-title">关注榜</h3>
-                        <ul id="focus-list" class="ranking-items"></ul>
-                    </div>
-                    <div id="value-retention" class="ranking-list" style="display: none;">
-                        <h3 class="ranking-title">保值榜</h3>
-                        <ul id="value_retention-list" class="ranking-items"></ul>
-                    </div>
-                </div>
-            </div>
-
-
-
+            <div id="page4" class="page" style="display: none;">汽车排行</div>
             <div id="page5" class="page" style="display: none;">汽车资讯</div>
             <div id="page6" class="page" style="display: block;">
                 <h2>Add Rental</h2>
@@ -213,5 +188,4 @@
 
 <script src="js/backstage.js"></script>
 </body>
-
 </html>
