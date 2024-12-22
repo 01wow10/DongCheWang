@@ -15,7 +15,7 @@
 <body>
 <div class="wrapper">
     <!-- 在这里将 zhuye.jsp 内容包含进来 -->
-    <%@ include file="zhuye.jsp" %>
+    <%@ include file="login.jsp" %>
 </div>
 </body>
 
