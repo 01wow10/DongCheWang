@@ -22,3 +22,81 @@ $(document).ready(function(){
         $(".wrapper").removeClass("active");
     });
 });
+$(document).ready(function() {
+    // 默认显示销量榜
+    $('#sales').show();
+    loadRankingData("sales"); // 默认加载销量榜
+
+    // 点击按钮时切换榜单
+    $('#sales-ranking').click(function() {
+        $('.ranking-list').hide();  // 隐藏所有榜单
+        $('#sales').show();         // 显示销量榜
+        loadRankingData("sales");
+    });
+
+    $('#focus-ranking').click(function() {
+        $('.ranking-list').hide();  // 隐藏所有榜单
+        $('#focus').show();         // 显示关注榜
+        loadRankingData("focus");
+    });
+
+    $('#value-retention-ranking').click(function() {
+        $('.ranking-list').hide();  // 隐藏所有榜单
+        $('#value-retention').show(); // 显示保值榜
+        loadRankingData("value_retention");
+    });
+
+    // 加载排行榜数据
+    function loadRankingData(rankingType) {
+        $.ajax({
+            url: "get_rank",  // 调用 Servlet
+            method: "GET",
+            data: { rankingType: rankingType },  // 传递参数
+            success: function(data) {
+                // 清空当前榜单列表
+                $("#" + rankingType + "-list").empty();
+
+                // 设置动态标题
+                var rankingTitle = "";
+                if (rankingType === "sales") {
+                    rankingTitle = "销量";
+                } else if (rankingType === "focus") {
+                    rankingTitle = "关注量";
+                } else if (rankingType === "value_retention") {
+                    rankingTitle = "保值率";
+                }
+
+                // 添加表格头
+                var headerHtml = "<div class='ranking-header'>" +
+                    "<span>排名</span>" +
+                    "<span>图片</span>" +
+                    "<span>车型</span>" +
+                    "<span>" + rankingTitle + "</span>" +
+                    "</div>";
+                $("#" + rankingType + "-list").append(headerHtml);
+
+// 根据返回的数据填充榜单
+                data.forEach(function(item, index) {
+                    var rank = index + 1;  // 排名是从1开始的
+                    $("#" + rankingType + "-list").append(
+                        "<div class='ranking-item'>" +
+                        "<span class='rank'>" + rank + "</span>" +
+                        "<img src='" + item.car_photo + "' alt='" + item.model + "' class='car-photo' />" +
+                        "<span class='model'>" + item.model + "</span>" +
+                        "<span class='value'>" + item.value + "</span>" +
+                        "</div>"
+                    );
+                });
+
+            },
+            error: function(xhr, status, error) {
+                console.error("Error fetching ranking data:", error);
+            }
+        });
+    }
+
+
+});
+
+
+
