@@ -10,9 +10,7 @@
     <link rel="stylesheet" href="css/backstage.css">
     <!--这里引入的是矢量图标签库-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
-
 <body>
 <div class="wrapper">
     <div class="sidebar">
@@ -22,9 +20,6 @@
                 <i class="fas fa-times"></i>
             </div>
             <div class="profile_info">
-                <div class="profile_img">
-                    <img src="images/logo_logo.png" alt="">
-                </div>
                 <div class="profile_data">
                     <p class="name">懂车王</p>
                     <span>
@@ -111,10 +106,106 @@
                 </iframe>
             </div>
             <div id="page3" class="page" style="display: none;">汽车信息查询</div>
-            <div id="page4" class="page" style="display: none;">汽车排行</div>
+
+            <div id="page4" class="page" style="display: none;">
+                <!-- 排行榜按钮区 -->
+                <div class="ranking-buttons">
+                    <button class="ranking-btn" id="sales-ranking">销量榜</button>
+                    <button class="ranking-btn" id="focus-ranking">关注榜</button>
+                    <button class="ranking-btn" id="value-retention-ranking">保值榜</button>
+                </div>
+
+                <!-- 榜单显示区 -->
+                <div class="ranking-content">
+                    <div id="sales" class="ranking-list" style="display: none;">
+                        <h3 class="ranking-title">销量榜</h3>
+                        <ul id="sales-list" class="ranking-items"></ul>
+                    </div>
+                    <div id="focus" class="ranking-list" style="display: none;">
+                        <h3 class="ranking-title">关注榜</h3>
+                        <ul id="focus-list" class="ranking-items"></ul>
+                    </div>
+                    <div id="value-retention" class="ranking-list" style="display: none;">
+                        <h3 class="ranking-title">保值榜</h3>
+                        <ul id="value_retention-list" class="ranking-items"></ul>
+                    </div>
+                </div>
+            </div>
+
+
+
             <div id="page5" class="page" style="display: none;">汽车资讯</div>
-            <div id="page6" class="page" style="display: none;">
-                二手车出租
+            <div id="page6" class="page" style="display: block;">
+                <h2>Add Rental</h2>
+                <form action="rental?action=add" method="post">
+                    <label for="car_id">Car ID:</label>
+                    <input type="number" id="car_id" name="car_id" required><br><br>
+                    <label for="user_id">User ID:</label>
+                    <input type="number" id="user_id" name="user_id" required><br><br>
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" id="start_date" name="start_date" required><br><br>
+                    <label for="end_date">End Date:</label>
+                    <input type="date" id="end_date" name="end_date" required><br><br>
+                    <label for="status_id">Status ID:</label>
+                    <select id="status_id" name="status_id" required>
+                        <option value="1">PENDING</option>
+                        <option value="2">RENTED</option>
+                        <option value="3">RETURNED</option>
+                    </select><br><br>
+                    <button type="submit">Add Rental</button>
+                </form>
+
+                <h2>Update Rental</h2>
+                <form action="rental?action=update" method="post">
+                    <label for="rental_id">Rental ID:</label>
+                    <input type="number" id="rental_id" name="rental_id" required><br><br>
+                    <label for="car_id_update">Car ID:</label>
+                    <input type="number" id="car_id_update" name="car_id" required><br><br>
+                    <label for="user_id_update">User ID:</label>
+                    <input type="number" id="user_id_update" name="user_id" required><br><br>
+                    <label for="start_date_update">Start Date:</label>
+                    <input type="date" id="start_date_update" name="start_date" required><br><br>
+                    <label for="end_date_update">End Date:</label>
+                    <input type="date" id="end_date_update" name="end_date" required><br><br>
+                    <label for="status_id_update">Status ID:</label>
+                    <select id="status_id_update" name="status_id" required>
+                        <option value="1">PENDING</option>
+                        <option value="2">RENTED</option>
+                        <option value="3">RETURNED</option>
+                    </select><br><br>
+                    <button type="submit">Update Rental</button>
+                </form>
+
+                <h2>Delete Rental</h2>
+                <form action="rental?action=delete" method="post">
+                    <label for="rental_id_delete">Rental ID:</label>
+                    <input type="number" id="rental_id_delete" name="rental_id" required><br><br>
+                    <button type="submit">Delete Rental</button>
+                </form>
+
+                <h2>All Rentals</h2>
+                <table border="1">
+                    <tr>
+                        <th>Rental ID</th>
+                        <th>Car ID</th>
+                        <th>User ID</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                    </tr>
+                    <c:forEach var="rental" items="${rentals}">
+                        <tr>
+                            <td>${rental.rentalId}</td>
+                            <td>${rental.carId}</td>
+                            <td>${rental.userId}</td>
+                            <td>${rental.startDate}</td>
+                            <td>${rental.endDate}</td>
+                            <td>${rental.totalPrice}</td>
+                            <td>${rental.statusName}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </div>
         </div>
     </div>
