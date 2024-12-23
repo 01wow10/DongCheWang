@@ -113,7 +113,7 @@
             <div id="page3" class="page" style="display: none;">汽车信息查询</div>
             <div id="page4" class="page" style="display: none;">汽车排行</div>
             <div id="page5" class="page" style="display: none;">
-                <jsp:include page="carNews.jsp"></jsp:include>
+                <jsp:include page="newshow.jsp"></jsp:include>
             </div>
             <div id="page6" class="page" style="display: none;">
                 二手车出租
@@ -124,7 +124,24 @@
 
 <script src="js/backstage.js"></script>
 
+<script>
+    $(document).ready(function() {
+        // 其他代码...
 
+        // 点击page5事件
+        $('a.menu-item[data-target="page5"]').click(function(e) {
+            e.preventDefault();
+            $('#page5').load('/car_recommendation_war_exploded/carNews', function() {
+                // 数据加载完成后的回调
+                console.log('Data loaded successfully');
+            });
+            $('.page').hide(); // 隐藏其他页面
+            $('#page5').show(); // 显示page5
+        });
+
+        // 其他代码...
+    });
+</script>
 </body>
 
 </html>
