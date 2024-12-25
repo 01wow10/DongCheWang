@@ -1,34 +1,52 @@
 package com.service;
 
+import com.dao.CarMaintenanceDao;
 import com.dao.CarRentalDao;
-import com.model.Rental;
+import com.model.CarMaintenance;
+import com.model.CarRental;
 
 import java.util.List;
 
 public class CarRentalService {
     private CarRentalDao carRentalDao;
+    private CarMaintenanceDao carMaintenanceDao;
 
     public CarRentalService() {
         this.carRentalDao = new CarRentalDao();
+        this.carMaintenanceDao = new CarMaintenanceDao();
     }
 
-    public boolean addRental(int carId, int userId, String startDate, String endDate, double totalPrice, int statusId) {
-        return carRentalDao.addRental(carId, userId, startDate, endDate, totalPrice, statusId);
+    // CarRental methods
+    public CarRental getCarRentalById(int id) {
+        return carRentalDao.getCarRentalById(id);
     }
 
-    public boolean updateRental(int rentalId, int carId, int userId, String startDate, String endDate, double totalPrice, int statusId) {
-        return carRentalDao.updateRental(rentalId, carId, userId, startDate, endDate, totalPrice, statusId);
+    public List<CarRental> getAllCarRentals() {
+        return carRentalDao.getAllCarRentals();
     }
 
-    public boolean deleteRental(int rentalId) {
-        return carRentalDao.deleteRental(rentalId);
+    public void addRental(int carId, int userId, java.sql.Date startDate, java.sql.Date endDate, int statusId) {
+        carRentalDao.addRental(carId, userId, startDate, endDate, statusId);
     }
 
-    public Rental getRentalById(int rentalId) {
-        return carRentalDao.getRentalById(rentalId);
+    public void updateRental(int rentalId, int carId, int userId, java.sql.Date startDate, java.sql.Date endDate, int statusId) {
+        carRentalDao.updateRental(rentalId, carId, userId, startDate, endDate, statusId);
     }
 
-    public List<Rental> getAllRentals() {
-        return carRentalDao.getAllRentals();
+    public void deleteRental(int rentalId) {
+        carRentalDao.deleteRental(rentalId);
+    }
+
+    public List<CarRental> queryRentals(int carId, int userId, java.sql.Date startDate, java.sql.Date endDate) {
+        return carRentalDao.queryRentals(carId, userId, startDate, endDate);
+    }
+
+    // CarMaintenance methods
+    public CarMaintenance getCarMaintenanceById(int id) {
+        return carMaintenanceDao.getCarMaintenanceById(id);
+    }
+
+    public List<CarMaintenance> getAllCarMaintenancesByCarRentalId(int carRentalId) {
+        return carMaintenanceDao.getAllCarMaintenancesByCarRentalId(carRentalId);
     }
 }

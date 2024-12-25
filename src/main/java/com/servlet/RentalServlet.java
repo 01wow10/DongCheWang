@@ -1,7 +1,8 @@
 package com.servlet;
 
+import com.model.CarMaintenance;
 import com.service.CarRentalService;
-import com.model.Rental;
+import com.model.CarRental;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,9 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @WebServlet("/rental")
@@ -26,12 +24,33 @@ public class RentalServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        if ("get".equals(action)) {
-            int rentalId = Integer.parseInt(request.getParameter("rental_id"));
-            Rental rental = carRentalService.getRentalById(rentalId);
-            request.setAttribute("rental", rental);
-        } else if ("getAll".equals(action)) {
-            List<Rental> rentals = carRentalService.getAllRentals();
+        if ("getCarRental".equals(action)) {
+            int carRentalId = Integer.parseInt(request.getParameter("carRentalId"));
+            CarRental carRental = carRentalService.getCarRentalById(carRentalId);
+            request.setAttribute("carRental", carRental);
+        } else if ("getAllCarRentals".equals(action)) {
+            List<CarRental> carRentals = carRentalService.getAllCarRentals();
+            request.setAttribute("carRentals", carRentals);
+        } else if ("getCarMaintenance".equals(action)) {
+            int carMaintenanceId = Integer.parseInt(request.getParameter("carMaintenanceId"));
+            CarMaintenance carMaintenance = carRentalService.getCarMaintenanceById(carMaintenanceId);
+            request.setAttribute("carMaintenance", carMaintenance);
+        } else if ("getAllCarMaintenancesByCarRentalId".equals(action)) {
+            int carRentalId = Integer.parseInt(request.getParameter("carRentalId"));
+            List<CarMaintenance> carMaintenances = carRentalService.getAllCarMaintenancesByCarRentalId(carRentalId);
+            request.setAttribute("carMaintenances", carMaintenances);
+        } else if ("query".equals(action)) {
+            String carIdStr = request.getParameter("car_id");
+            String userIdStr = request.getParameter("user_id");
+            String startDateStr = request.getParameter("start_date");
+            String endDateStr = request.getParameter("end_date");
+
+            int carId = carIdStr != null && !carIdStr.isEmpty() ? Integer.parseInt(carIdStr) : 0;
+            int userId = userIdStr != null && !userIdStr.isEmpty() ? Integer.parseInt(userIdStr) : 0;
+            java.sql.Date startDate = startDateStr != null && !startDateStr.isEmpty() ? java.sql.Date.valueOf(startDateStr) : null;
+            java.sql.Date endDate = endDateStr != null && !endDateStr.isEmpty() ? java.sql.Date.valueOf(endDateStr) : null;
+
+            List<CarRental> rentals = carRentalService.queryRentals(carId, userId, startDate, endDate);
             request.setAttribute("rentals", rentals);
         }
 
@@ -43,67 +62,27 @@ public class RentalServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         if ("add".equals(action)) {
-            handleAddRental(request, response);
+            int carId = Integer.parseInt(request.getParameter("car_id"));
+            int userId = Integer.parseInt(request.getParameter("user_id"));
+            java.sql.Date startDate = java.sql.Date.valueOf(request.getParameter("start_date"));
+            java.sql.Date endDate = java.sql.Date.valueOf(request.getParameter("end_date"));
+            int statusId = Integer.parseInt(request.getParameter("status_id"));
+
+            carRentalService.addRental(carId, userId, startDate, endDate, statusId);
         } else if ("update".equals(action)) {
-            handleUpdateRental(request, response);
+            int rentalId = Integer.parseInt(request.getParameter("rental_id"));
+            int carId = Integer.parseInt(request.getParameter("car_id"));
+            int userId = Integer.parseInt(request.getParameter("user_id"));
+            java.sql.Date startDate = java.sql.Date.valueOf(request.getParameter("start_date"));
+            java.sql.Date endDate = java.sql.Date.valueOf(request.getParameter("end_date"));
+            int statusId = Integer.parseInt(request.getParameter("status_id"));
+
+            carRentalService.updateRental(rentalId, carId, userId, startDate, endDate, statusId);
         } else if ("delete".equals(action)) {
-            handleDeleteRental(request, response);
+            int rentalId = Integer.parseInt(request.getParameter("rental_id"));
+            carRentalService.deleteRental(rentalId);
         }
-    }
 
-    private void handleAddRental(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int carId = Integer.parseInt(request.getParameter("car_id"));
-        int userId = Integer.parseInt(request.getParameter("user_id"));
-        String startDateStr = request.getParameter("start_date");
-        String endDateStr = request.getParameter("end_date");
-        int statusId = Integer.parseInt(request.getParameter("status_id"));
-
-        LocalDate startDate = LocalDate.parse(startDateStr);
-        LocalDate endDate = LocalDate.parse(endDateStr);
-
-        double totalPrice = calculateTotalPrice(carId, startDate, endDate);
-
-        if (carRentalService.addRental(carId, userId, startDate.toString(), endDate.toString(), totalPrice, statusId)) {
-            response.sendRedirect("rental?action=getAll");
-        } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to add rental.");
-        }
-    }
-
-    private void handleUpdateRental(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int rentalId = Integer.parseInt(request.getParameter("rental_id"));
-        int carId = Integer.parseInt(request.getParameter("car_id"));
-        int userId = Integer.parseInt(request.getParameter("user_id"));
-        String startDateStr = request.getParameter("start_date");
-        String endDateStr = request.getParameter("end_date");
-        int statusId = Integer.parseInt(request.getParameter("status_id"));
-
-        LocalDate startDate = LocalDate.parse(startDateStr);
-        LocalDate endDate = LocalDate.parse(endDateStr);
-
-        double totalPrice = calculateTotalPrice(carId, startDate, endDate);
-
-        if (carRentalService.updateRental(rentalId, carId, userId, startDate.toString(), endDate.toString(), totalPrice, statusId)) {
-            response.sendRedirect("rental?action=getAll");
-        } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update rental.");
-        }
-    }
-
-    private void handleDeleteRental(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int rentalId = Integer.parseInt(request.getParameter("rental_id"));
-
-        if (carRentalService.deleteRental(rentalId)) {
-            response.sendRedirect("rental?action=getAll");
-        } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to delete rental.");
-        }
-    }
-
-    private double calculateTotalPrice(int carId, LocalDate startDate, LocalDate endDate) {
-        // Assuming there is a method in the service or dao layer to get the car's price per day.
-        double pricePerDay = carRentalService.getPricePerDay(carId);
-        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
-        return BigDecimal.valueOf(daysBetween * pricePerDay).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        response.sendRedirect("rental?action=getAllCarRentals");
     }
 }

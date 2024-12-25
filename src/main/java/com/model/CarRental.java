@@ -1,33 +1,35 @@
 package com.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Rental {
-    private int rentalId;
+public class CarRental {
+    private int id;
     private int carId;
     private int userId;
     private LocalDate startDate;
     private LocalDate endDate;
-    private double totalPrice;
-    private String statusName;
+    private BigDecimal totalPrice;
+    private int statusId;
 
-    public Rental(int rentalId, int carId, int userId, LocalDate startDate, LocalDate endDate, double totalPrice, String statusName) {
-        this.rentalId = rentalId;
+    // 构造函数
+    public CarRental(int id, int carId, int userId, LocalDate startDate, LocalDate endDate, BigDecimal totalPrice, int statusId) {
+        this.id = id;
         this.carId = carId;
         this.userId = userId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalPrice = totalPrice;
-        this.statusName = statusName;
+        this.statusId = statusId;
     }
 
-    // Getters and Setters
-    public int getRentalId() {
-        return rentalId;
+    // Getter 和 Setter 方法
+    public int getId() {
+        return id;
     }
 
-    public void setRentalId(int rentalId) {
-        this.rentalId = rentalId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getCarId() {
@@ -62,19 +64,19 @@ public class Rental {
         this.endDate = endDate;
     }
 
-    public double getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public String getStatusName() {
-        return statusName;
+    public int getStatusId() {
+        return statusId;
     }
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
     }
 }

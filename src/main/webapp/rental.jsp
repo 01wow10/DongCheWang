@@ -1,3 +1,4 @@
+<!-- rental.jsp -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -156,6 +157,19 @@
                     <label for="rental_id_delete">Rental ID:</label>
                     <input type="number" id="rental_id_delete" name="rental_id" required><br><br>
                     <button type="submit">Delete Rental</button>
+                </form>
+
+                <h2>Query Rentals</h2>
+                <form action="rental?action=query" method="get">
+                    <label for="query_car_id">Car ID:</label>
+                    <input type="number" id="query_car_id" name="car_id"><br><br>
+                    <label for="query_user_id">User ID:</label>
+                    <input type="number" id="query_user_id" name="user_id"><br><br>
+                    <label for="query_start_date">Start Date:</label>
+                    <input type="date" id="query_start_date" name="start_date"><br><br>
+                    <label for="query_end_date">End Date:</label>
+                    <input type="date" id="query_end_date" name="end_date"><br><br>
+                    <button type="submit">Query Rentals</button>
                 </form>
 
                 <h2>All Rentals</h2>
