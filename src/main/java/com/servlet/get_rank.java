@@ -53,9 +53,10 @@ public class get_rank extends HttpServlet {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             String model = jsonObject.getString("model"); // 获取车型
             int value = jsonObject.getInt("sales"); // 获取销量
+            String car_photo = jsonObject.getString("car_photo");
 
             // 创建 RankItem 对象，并将其添加到 list
-            list.add(new RankItem(model, value));
+            list.add(new RankItem(model, value,car_photo));
         }
 
         return list; // 返回包含排名数据的 list
@@ -73,9 +74,10 @@ public class get_rank extends HttpServlet {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             String model = jsonObject.getString("model"); // 获取车型
             int value = jsonObject.getInt("followers"); //
+            String car_photo = jsonObject.getString("car_photo");
 
             // 创建 RankItem 对象，并将其添加到 list
-            list.add(new RankItem(model, value));
+            list.add(new RankItem(model, value,car_photo));
         }
 
         return list; // 返回包含排名数据的 list
@@ -92,9 +94,10 @@ public class get_rank extends HttpServlet {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             String model = jsonObject.getString("model"); // 获取车型
             int value = jsonObject.getInt("hedge"); //
+            String car_photo = jsonObject.getString("car_photo");
 
             // 创建 RankItem 对象，并将其添加到 list
-            list.add(new RankItem(model, value));
+            list.add(new RankItem(model, value,car_photo));
         }
 
         return list; // 返回包含排名数据的 list
@@ -105,9 +108,20 @@ public class get_rank extends HttpServlet {
         private String model;
         private int value;
 
-        public RankItem(String model, int value) {
+        private String car_photo;
+
+        public RankItem(String model, int value,String car_photo) {
             this.model = model;
             this.value = value;
+            this.car_photo = car_photo;
+        }
+
+        public String getCar_photo() {
+            return car_photo;
+        }
+
+        public void setCar_photo(String car_photo) {
+            this.car_photo = car_photo;
         }
 
         public String getModel() {

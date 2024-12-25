@@ -78,15 +78,21 @@ $(document).ready(function() {
 // 根据返回的数据填充榜单
                 data.forEach(function(item, index) {
                     var rank = index + 1;  // 排名是从1开始的
+
+                    // 假设数据库返回的路径是 'D:\\car_recommendation\\src\\main\\webapp\\static\\haiou.jpg'
+                    // 你需要将其转换为可以访问的相对路径 '/static/haiou.jpg'
+                    var carPhotoPath = item.car_photo.replace("D:\\car_recommendation\\src\\main\\webapp\\static", "/car_recommendation_war ````/static");
+
                     $("#" + rankingType + "-list").append(
                         "<div class='ranking-item'>" +
                         "<span class='rank'>" + rank + "</span>" +
-                        "<img src='" + item.car_photo + "' alt='" + item.model + "' class='car-photo' />" +
+                        "<img src='" + carPhotoPath + "' alt='" + item.model + "' class='car-photo' />" +
                         "<span class='model'>" + item.model + "</span>" +
                         "<span class='value'>" + item.value + "</span>" +
                         "</div>"
                     );
                 });
+
 
             },
             error: function(xhr, status, error) {
