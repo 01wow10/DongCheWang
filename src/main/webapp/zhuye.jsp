@@ -137,7 +137,7 @@
                             <td>${car.mileage}</td>
                             <td>${car.age}</td>
                             <td>${car.price}</td>
-                            <td><a href="car-detail?id=${car.id}">查看详情</a></td>
+                            <td><a href="car_details.jsp?id=${car.id}">查看详情</a></td>
                         </tr>
                     </c:forEach>
                     <!-- 数据将通过 JavaScript 动态插入 -->

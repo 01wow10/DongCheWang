@@ -1,3 +1,4 @@
+<!-- D:\Project\DongCheWang\EX04\src\main\webapp\WEB-INF\views\car_details.jsp -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -127,7 +128,7 @@
           </tr>
           </thead>
           <tbody>
-          <c:forEach var="maintenance" items="${car.maintenances}">
+          <c:forEach var="maintenance" items="${maintenances}">
             <tr>
               <td>${maintenance.id}</td>
               <td>${maintenance.maintenanceDate}</td>
@@ -139,6 +140,41 @@
           </tbody>
         </table>
         <a href="rental?action=list">返回汽车列表</a>
+      </div>
+      <!-- 添加汽车详细信息部分 -->
+      <div id="carDetails" class="page" style="display: block;">
+        <h2>汽车详细信息</h2>
+        <p>ID: ${car.id}</p>
+        <p>品牌: ${car.brand}</p>
+        <p>里程: ${car.mileage}</p>
+        <p>年龄: ${car.age}</p>
+        <p>价格: ${car.price}</p>
+        <p>联系方式: ${car.contactWay}</p>
+        <p>照片: <img src="${car.carPhoto}" alt="Car Photo" style="width: 200px;"></p>
+        <h3>维护记录</h3>
+        <table border="1">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>维护日期</th>
+            <th>维护类型</th>
+            <th>描述</th>
+            <th>费用</th>
+          </tr>
+          </thead>
+          <tbody>
+          <c:forEach var="maintenance" items="${maintenances}">
+            <tr>
+              <td>${maintenance.id}</td>
+              <td>${maintenance.maintenanceDate}</td>
+              <td>${maintenance.maintenanceType}</td>
+              <td>${maintenance.description}</td>
+              <td>${maintenance.cost}</td>
+            </tr>
+          </c:forEach>
+          </tbody>
+        </table>
+        <a href="zhuye.jsp">返回汽车列表</a>
       </div>
     </div>
   </div>

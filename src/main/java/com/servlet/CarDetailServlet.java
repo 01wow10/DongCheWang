@@ -1,5 +1,9 @@
-// D:\Project\DongCheWang\EX04\src\main\java\com\dongchewang\controller\CarDetailServlet.java
 package com.servlet;
+
+import com.dao.CarRentalDAO;
+import com.dao.CarMaintenanceDAO;
+import com.model.CarRental;
+import com.model.CarMaintenance;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,28 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/car-detail")
 public class CarDetailServlet extends HttpServlet {
+    private CarRentalDAO carRentalDAO = new CarRentalDAO();
+    private CarMaintenanceDAO carMaintenanceDAO = new CarMaintenanceDAO();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 获取请求参数
-        String carId = request.getParameter("id");
+        int carId = Integer.parseInt(request.getParameter("id"));
+        CarRental car = carRentalDAO.getCarById(carId);
+        List<CarMaintenance> maintenances = carMaintenanceDAO.getMaintenanceByCarId(carId);
 
-        // 根据 carId 获取汽车详细信息
-        // 这里假设你有一个方法 getCarById 来获取汽车信息
-        Car car = getCarById(carId);
-
-        // 将汽车信息存储在请求属性中
         request.setAttribute("car", car);
-
-        // 转发到 car-detail.jsp 页面
-        request.getRequestDispatcher("/car-detail.jsp").forward(request, response);
-    }
-
-    private Car getCarById(String carId) {
-        // 实现获取汽车信息的逻辑
-        // 这里只是一个示例
-        return new Car(carId, "Brand", 10000, 5, 20000);
+        request.setAttribute("maintenances", maintenances);
+        request.getRequestDispatcher("/WEB-INF/EX04_war/car-detail.jsp").forward(request, response);
     }
 }

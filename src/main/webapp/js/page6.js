@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     const detailCell = document.createElement('td');
                     const detailLink = document.createElement('a');
-                    detailLink.href = `car-detail?id=${car.id}`;
+                    detailLink.href = `car_details.jsp?id=${car.id}`;
                     detailLink.textContent = '查看详情';
                     detailCell.appendChild(detailLink);
                     row.appendChild(detailCell);
