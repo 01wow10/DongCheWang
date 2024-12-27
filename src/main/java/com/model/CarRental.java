@@ -1,29 +1,17 @@
 package com.model;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class CarRental {
     private int id;
-    private int carId;
-    private int userId;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private BigDecimal totalPrice;
-    private int statusId;
+    private String carPhoto;
+    private String contactWay;
+    private String brand;
+    private float mileage;
+    private int age;
+    private float price;
 
-    // 构造函数
-    public CarRental(int id, int carId, int userId, LocalDate startDate, LocalDate endDate, BigDecimal totalPrice, int statusId) {
-        this.id = id;
-        this.carId = carId;
-        this.userId = userId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.totalPrice = totalPrice;
-        this.statusId = statusId;
-    }
-
-    // Getter 和 Setter 方法
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -32,51 +20,61 @@ public class CarRental {
         this.id = id;
     }
 
-    public int getCarId() {
-        return carId;
+    public String getCarPhoto() {
+        return carPhoto;
     }
 
-    public void setCarId(int carId) {
-        this.carId = carId;
+    public void setCarPhoto(String carPhoto) {
+        this.carPhoto = carPhoto;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getContactWay() {
+        return contactWay;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setContactWay(String contactWay) {
+        this.contactWay = contactWay;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public float getMileage() {
+        return mileage;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setMileage(float mileage) {
+        this.mileage = mileage;
     }
 
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
+    public int getAge() {
+        return age;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public int getStatusId() {
-        return statusId;
+    public float getPrice() {
+        return price;
     }
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public CarRental(int id, String carPhoto, String contactWay, String brand, float mileage, int age, float price) {
+        this.id = id;
+        this.carPhoto = carPhoto;
+        this.contactWay = contactWay;
+        this.brand = brand;
+        this.mileage = mileage;
+        this.age = age;
+        this.price = price;
     }
 }
