@@ -1,0 +1,58 @@
+
+
+
+#page6 table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border: none; /* 去掉表格边框 */
+    background-color: white; /* 设置表格背景颜色为白色 */
+}
+
+#page6 table thead {
+    background-color: #286090; /* 蓝色主题 */
+    color: white;
+}
+
+#page6 table thead th {
+    padding: 10px;
+    text-align: left;
+    background-color: #6fa4d2;
+    border: none; /* 去掉表头单元格的边框 */
+}
+
+#page6 table tbody td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* 可选：仅保留底部边框 */
+    border-left: none; /* 去掉左边框 */
+    border-right: none; /* 去掉右边框 */
+}
+
+#page6 table tbody tr:hover {
+    background-color: #bbcad8; /* 鼠标悬停时的背景颜色 */
+}
+
+/* 汽车详细信息样式 */
+#page6 .car-details {
+    margin-bottom: 20px; /* 增加汽车详细信息与表格之间的间距 */
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #6fa4d2;
+    border-radius: 5px;
+}
+
+#page6 .car-details h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+#page6 .car-details p {
+    margin: 5px 0;
+    color: #555;
+}
+
+#page6 .car-details img {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+}
