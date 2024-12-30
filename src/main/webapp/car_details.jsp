@@ -14,6 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Car Details</title>
   <link rel="stylesheet" href="css/backstage.css">
+  <link rel="stylesheet" href="css/car_details.css">
   <!--这里引入的是矢量图标签库-->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
@@ -139,6 +140,7 @@
           List<CarMaintenance> maintenances = carDetailService.getMaintenanceByCarId(carId);
           request.setAttribute("maintenances", maintenances);
         %>
+        <div class="car-details">
         <h2>汽车详细信息</h2>
         <p>ID: <%= car.getId() %></p>
         <p>品牌: <%= car.getBrand() %></p>
@@ -147,6 +149,7 @@
         <p>价格: <%= car.getPrice() %></p>
         <p>联系方式: <%= car.getContactWay() %></p>
         <p>照片: <img src="<%= car.getCarPhoto() %>" alt="Car Photo" style="width: 200px;"></p>
+        </div>
         <h3>维护记录</h3>
         <table border="1">
           <thead>
